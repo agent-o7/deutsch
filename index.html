@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Défi Allemand - 8 Mois vers la Fluidité</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            color: #2d3748;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .progress-bar {
+            background: #e2e8f0;
+            border-radius: 25px;
+            height: 20px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #48bb78, #38a169);
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 25px;
+        }
+
+        .month-container {
+            margin: 30px 0;
+            border: 2px solid #e2e8f0;
+            border-radius: 15px;
+            padding: 25px;
+            background: linear-gradient(145deg, #f7fafc, #edf2f7);
+        }
+
+        .month-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .month-header:hover {
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .month-title {
+            font-size: 1.5em;
+            color: #2d3748;
+            font-weight: bold;
+        }
+
+        .month-level {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 25px;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+
+        .challenges-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .challenge-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            border-left: 5px solid;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .challenge-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .vocab-card { border-left-color: #ff6b6b; }
+        .grammar-card { border-left-color: #4ecdc4; }
+        .speaking-card { border-left-color: #45b7d1; }
+        .listening-card { border-left-color: #96ceb4; }
+        .writing-card { border-left-color: #feca57; }
+        .culture-card { border-left-color: #ff9ff3; }
+
+        .challenge-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #2d3748;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .challenge-description {
+            color: #4a5568;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .challenge-goal {
+            background: #f0fff4;
+            border: 1px solid #9ae6b4;
+            border-radius: 8px;
+            padding: 10px;
+            font-size: 0.9em;
+            color: #2f855a;
+        }
+
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .custom-checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #cbd5e0;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .custom-checkbox.checked {
+            background: linear-gradient(45deg, #48bb78, #38a169);
+            border-color: #38a169;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-label {
+            color: #4a5568;
+            margin-top: 5px;
+        }
+
+        .motivational-quote {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 30px 0;
+            font-style: italic;
+            font-size: 1.1em;
+        }
+
+        .collapsed {
+            display: none;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .pulse {
+            animation: pulse 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🇩🇪 Défi Allemand - 8 Mois vers la Fluidité</h1>
+            <p>Objectif: Parler couramment avant tes 19 ans !</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="overallProgress"></div>
+            </div>
+            <p id="progressText">Progression: 0/64 défis complétés</p>
+        </div>
+
+        <div class="stats-container">
+            <div class="stat-card">
+                <div class="stat-number" id="completedChallenges">0</div>
+                <div class="stat-label">Défis Complétés</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="currentStreak">0</div>
+                <div class="stat-label">Série Actuelle</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="estimatedLevel">A1</div>
+                <div class="stat-label">Niveau Estimé</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="timeRemaining">8</div>
+                <div class="stat-label">Mois Restants</div>
+            </div>
+        </div>
+
+        <div class="motivational-quote">
+            "Jeder Tag ist eine neue Chance, besser zu werden!" 
+            <br><em>(Chaque jour est une nouvelle chance de s'améliorer !)</em>
+        </div>
+
+        <!-- Mois 1 -->
+        <div class="month-container">
+            <div class="month-header" onclick="toggleMonth('month1')">
+                <span class="month-title">📚 Mois 1 : Les Fondations</span>
+                <span class="month-level">A1 Débutant</span>
+            </div>
+            <div id="month1" class="challenges-grid">
+                <div class="challenge-card vocab-card" onclick="toggleChallenge(this)">
+                    <div class="challenge-title">🔤 Vocabulaire de Base</div>
+                    <div class="challenge-description">Apprends 300 mots essentiels du quotidien</div>
+                    <div class="challenge-goal">🎯 Objectif: 10 mots nouveaux par jour</div>
+                    <div class="checkbox-container">
+                        <div class="custom-checkbox" data-challenge="vocab1"></div>
+                        <span>Défi complété</span>
+                    </div>
+                </div>
+
+                <div class="challenge-card grammar-card" onclick="toggleChallenge(this)">
+                    <div class="challenge-title">⚡ Grammaire : Présent</div>
+                    <div class="challenge-description">Maîtrise les verbes être, avoir et les verbes réguliers au présent</div>
+                    <div class="challenge-goal">🎯 Objectif: Conjuguer sans hésiter</div>
+                    <div class="checkbox-container">
+                        <div class="custom-checkbox" data-challenge="grammar1"></div>
+                        <span>Défi complété</span>
+                    </div>
+                </div>
+
+                <div class="challenge-card listening-card" onclick="toggleChallenge(this)">
+                    <div class="challenge-title">👂 Écoute Quotidienne</div>
+                    <div class="challenge-description">15min d'allemand simple par jour (Nicos Weg, Deutsche Welle)</div>
+                    <div class="challenge-goal">🎯 Objectif: Comprendre des phrases simples</div>
+                    <div class="checkbox-container">
+                        <div class="custom-checkbox" data-challenge="listening1"></div>
+                        <span>Défi complété</span>
+                    </div>
+                </div>
+
+                <div class="challenge-card speaking-card" onclick="toggleChallenge(this)">
+                    <div class="challenge-title">🗣️ Premiers Mots</div>
+                    <div class="challenge-description">Présente-toi en allemand (nom, âge, ville, hobbies)</div>
+                    <div class="challenge-goal">🎯 Objectif: 2 minutes de présentation fluide</div>
+                    <div class="checkbox-container">
+                        <div class="custom-checkbox" data-challenge="speaking1"></div>
+                        <span>Défi complété</span>
+                    </div>
+                </div>
+
+                <div class="challenge-card culture-card" onclick="toggleChallenge(this)">
+                    <div class="challenge-title">🏰 Culture Allemande</div>
+                    <div class="challenge-description">Découvre 5 traditions allemandes et apprends leur vocabulaire</div>
+                    <div class="challenge-goal">🎯 Objectif: Expliquer une tradition en allemand</div>
+                    <div class="checkbox-container">
+                        <div class="custom-checkbox" data-challenge="culture1"></div>
+                        <span>Défi complété</span>
+                    </div>
+                </div>
+
+                <div class="challenge-card writing-card" onclick="toggleChallenge(this)">
+                    <div class="challenge-title">✏️ Phrases Simples</div>
+                    <div class="challenge-description">Écris 5 phrases sur ta journée type chaque soir</div>
+                    <div class="challenge-goal">🎯 Objectif: Décrire sa routine quotidienne</div>
+                    <div class="checkbox-container">
+                        <div class="custom-checkbox" data-challenge="writing1"></div>
+                        <span>Défi complété</span>
+                    </div>
+                </div>
+
+                <div class="challenge-card vocab-card" onclick="toggleChallenge(this)">
+                    <div class="challenge-title">🏠 Vocabulaire : Maison</div>
+                    <div class="challenge-description">Apprends tous les objets et pièces de la maison</div>
+                    <div class="challenge-goal">🎯 Objectif: Décrire ta maison en détail</div>
+                    <div class="checkbox-container">
+                        <div class="custom-checkbox" data-challenge="vocab-house"></div>
+                        <span>Défi complété</span>
+                    </div>
+                </div>
+
+                <div class="challenge-card speaking-card" onclick="toggleChallenge(this)">
+                    <div class="challenge-title">💬 Dialogue Quotidien</div>
+                    <div class="challenge-description">Pratique des conversations simples avec Hellotalk ou Tandem</div>
+                    <div class="challenge-goal">🎯 Objectif: 10 minutes de conversation par jour</div>
+                    <div class="checkbox-container">
+                        <div class="custom-checkbox" data-challenge="daily-talk1"></div>
+                        <span>Défi complété</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mois 2 -->
+        <div class="month-container">
+            <div class="month-header" onclick="toggleMonth('month2')">
+                <span class="month-title">🚀 Mois 2 : Prendre de l'Élan</span>
+                <span class="month-level">A1+ Progression</span>
+            </div>
+            <div id="month2" class="challenges-grid collapsed">
+                <div class="challenge-card grammar-card" onclick="toggleChallenge(this)">
+                    <div class="challenge-title">📐 Les Cas Allemands</div>
+                    <div class="challenge-description">Comprends et utilise le nominatif et l'accusatif</div>
+                    <div class="challenge-goal">🎯 Objectif: Utiliser der/die/das/den correctement</div>
+                    <div class="checkbox-container">
+                        <div class="custom-checkbox" data-challenge="cases1"></div>
+                        <span>Défi complété</span>
+                    </div>
+                </div>
+
+                <div class="challenge-card vocab-card" onclick="toggleChallenge(this)">
+                    <div class="challenge-title">🍽️ Vocabulaire : Nourriture</div>
+                    <div class="challenge-description">Apprends 200 mots sur la cuisine et les repas allemands</div>
+                    <div class="challenge-goal">🎯 Objectif: Commander au restaurant en allemand</div>
+                    <div class="checkbox-container">
+                        <div class="custom-checkbox" data-challenge="food-vocab"></div>
+                        <span>Défi complété</span>
+                    </div>
+                </div>
+
+                <div class="challenge-card listening-card" onclick="toggleChallenge(this)">
+                    <div class="challenge-title">🎵 Musique Allemande</div>
+                    <div class="challenge-description">Écoute et traduis 5 chansons allemandes populaires</div>
+                    <div class="challenge-goal">🎯 Objectif: Chanter une chanson entière</div>
+                    <div class="checkbox-container">
+                        <div class="custom-checkbox" data-challenge="german-music"></div>
+                        <span>Défi complété</span>
+                    </div>
+                </div>
+
+                <div class="challenge-card speaking-card" onclick="toggleChallenge(this)">
+                    <div class="challenge-title">📞 Conversations Téléphoniques</div>
+                    <div class="challenge-description">Pratique des appels simples (rendez-vous, informations)</div>
+                    <div class="challenge-goal">🎯 Objectif: 5 conversations téléphoniques réussies</div>
+                    <div class="checkbox-container">
+                        <div class="custom-checkbox" data-challenge="phone-calls"></div>
+                        <span>Défi complété</span>
+                    </div>
+                </div>
+
+                <div class="challenge-card writing-card" onclick="toggleChallenge(this)">
+                    <div class="challenge-title">📝 Journal Personnel</div>
+                    <div class="challenge-description">Tiens un journal en allemand (100 mots/jour minimum)</div>
+                    <div class="challenge-goal">🎯 Objectif: 30 jours d'écriture continue</div>
+                    <div class="checkbox-container">
+                        <div class="custom-checkbox" data-challenge="journal"></div>
+                        <span>Défi complété</span>
+                    </div>
+                </div>
+
+                <div class="challenge-card culture-card" onclick="toggleChallenge(this)">
+                    <div class="challenge-title">🎬 Cinéma Allemand</div>
+                    <div class="challenge-description">Regarde 3 films allemands avec sous-titres allemands</div>
+                    <div class="challenge-goal">🎯 Objectif: Comprendre l'intrigue sans aide</div>
+                    <div class="checkbox-container">
+                        <div class="custom-checkbox" data-challenge="german-cinema"></div>
+                        <span>Défi complété</span>
+                    </div>
+                </div>
+
+                <div class="challenge-card grammar-card" onclick="toggleChallenge(this)">
+                    <div class="challenge-title">⏰ Passé Composé</div>
+                    <div class="challenge-description">Maîtrise le Perfekt pour parler du passé</div>
+                    <div class="challenge-goal">🎯 Objectif: Raconter ton week-end au passé</div>
+                    <div class="checkbox-container">
+                        <div class="custom-checkbox" data-challenge="past-tense"></div>
+                        <span>Défi complété</span>
+                    </div>
+                </div>
+
+                <div class="challenge-card vocab-card" onclick="toggleChallenge(this)">
+                    <div class="challenge-title">🚌 Transport & Voyage</div>
+                    <div class="challenge-description">Vocabulaire pour se déplacer et voyager en Allemagne</div>
+                    <div class="challenge-goal">🎯 Objectif: Organiser un voyage fictif</div>
+                    <div class="checkbox-container">
+                        <div class="custom-checkbox" data-challenge="travel-vocab"></div>
+                        <span>Défi complété</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mois 3 -->
+        <div class="month-container">
+            <div class="month-header" onclick="toggleMonth('month3')">
+                <span class="month-title">⚡ Mois 3 : Accélération</span>
+                <span class="month-level">A2 Intermédiaire</span>
+            </div>
+            <div id="month3" class="challenges-grid collapsed">
+                <div class="challenge-card grammar-card" onclick="toggleChallenge(this)">
+                    <div class="challenge-title">🧭 Datif & Génitif</div>
+                    <div class="challenge-description">Comprends et utilise tous les cas allemands</div>
+                    <div class="challenge-goal">🎯 Objectif: Maîtriser les 4 cas</div>
+                    <div class="checkbox-container">
+                        <div class="custom-checkbox" data-challenge="all-cases"></div>
+                        <span>Défi complété</span>
+                    </div>
+                </div>
+
+                <div class="challenge-card speaking-card" onclick="toggleChallenge(this)">
+                    <div class="challenge-title">🎯 Débats Simples</div>
+                    <div class="challenge-description">Exprime ton opinion sur des sujets du quotidien</div>
+                    <div class="challenge-goal">🎯 Objectif: Argumenter pendant 5 minutes</div>
+                    <div class="checkbox-container">
+                        <div class="custom-checkbox" data-challenge="debates"></div>
+                        <span>Défi complété</span>
+                    </div>
+                </div>
+
+                <div class="challenge-card listening-card" onclick="toggleChallenge(this)">
+                    <div class="challenge-title">📺 Actualités Allemandes</div>
+                    <div class="challenge-description">Suis les actualités allemandes 15min/jour (Tagesschau)</div>
+                    <div class="challenge-goal">🎯 Objectif: Résumer 3 actualités par semaine</div>
+                    <div class="checkbox-container">
+                        <div class="custom-checkbox" data-challenge="news"></div>
+                        <span>Défi complété</span>
+                    </div>
+                </div>
+
+                <div class="challenge-card writing-card" onclick="toggleChallenge(this)">
+                    <div class="challenge-title">✉️ Correspondance</div>
+                    <div class="challenge-description">Écris des emails formels et informels en allemand</div>
+                    <div class="challenge-goal">🎯 Objectif: 10 emails différents</div>
+                    <div class="checkbox-container">
+                        <div class="custom-checkbox" data-challenge="emails"></div>
+                        <span>Défi complété</span>
+                    </div>
+                </div>
+
+                <div class="challenge-card vocab-card" onclick="toggleChallenge(this)">
+                    <div class="challenge-title">💼 Vie Professionnelle</div>
+                    <div class="challenge-description">Vocabulaire du travail et des études</div>
+                    <div class="challenge-goal">🎯 Objectif: Passer un entretien fictif</div>
+                    <div class="checkbox-container">
+                        <div class="custom-checkbox" data-challenge="work-vocab"></div>
+                        <span>Défi complété</span>
+                    </div>
+                </div>
+
+                <div class="challenge-card culture-card" onclick="toggleChallenge(this)">
+                    <div class="challenge-title">📚 Littérature</div>
+                    <div class="challenge-description">Lis tes premiers textes littéraires courts</div>
+                    <div class="challenge-goal">🎯 Objectif: Analyser un poème</div>
+                    <div class="checkbox-container">
+                        <div class="custom-checkbox" data-challenge="literature"></div>
+                        <span>Défi complété</span>
+                    </div>
+                </div>
+
+                <div class="challenge-card grammar-card" onclick="toggleChallenge(this)">
+                    <div class="challenge-title">🔮 Futur & Conditionnel</div>
+                    <div class="challenge-description">Exprime tes projets et hypothèses</div>
+                    <div class="challenge-goal">🎯 Objectif: Parler de tes rêves d'avenir</div>
+                    <div class="checkbox-container">
+                        <div class="custom-checkbox" data-challenge="future-tense"></div>
+                        <span>Défi complété</span>
+                    </div>
+                </div>
+
+                <div class="challenge-card speaking-card" onclick="toggleChallenge(this)">
+                    <div class="challenge-title">🎤 Présentations</div>
+                    <div class="challenge-description">Fais des présentations de 10 minutes sur tes passions</div>
+                    <div class="challenge-goal">🎯 Objectif: 3 présentations fluides</div>
+                    <div class="checkbox-container">
+                        <div class="custom-checkbox" data-challenge="presentations"></div>
+                        <span>Défi complété</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Continue with months 4-8 following the same pattern -->
+        <div class="month-container">
+            <div class="month-header" onclick="toggleMonth('month4')">
+                <span class="month-title">🎭 Mois 4 : Expression Créative</span>
+                <span class="month-level">A2+ Avancé</span>
+            </div>
+            <div id="month4" class="challenges-grid collapsed">
+                <div class="challenge-card speaking-card" onclick="toggleChallenge(this)">
+                    <div class="challenge-title">🎪 Storytelling</div>
+                    <div class="challenge-description">Raconte des histoires captivantes en allemand</div>
+                    <div class="challenge-goal">🎯 Objectif: 3 histoires de 15 minutes</div>
+                    <div class="checkbox-container">
+                        <div class="custom-checkbox" data-challenge="storytelling"></div>
+                        <span>Défi complété</span>
+                    </div>
+                </div>
+
+                <div class="challenge-card writing-card" onclick="toggleChallenge(this)">
+                    <div class="challenge-title">📖 Nouvelles Courtes</div>
+                    <div class="challenge-description">Écris 5 nouvelles courtes (500 mots chacune)</div>
+                    <div class="challenge-goal">🎯 Objectif: Publier sur un blog allemand</div>
+                    <div class="checkbox-container">
+                        <div class="custom-checkbox" data-challenge="short-stories"></div>
+                        <span>Défi complété</span>
+                    </div>
+                </div>
+
+                <div class="challenge-card culture-card" onclick="toggleChallenge(this)">
+                    <div class="challenge-title">🏛️ Histoire Allemande</div>
+                    <div class="challenge-description">Étudie les grandes périodes de l'histoire allemande</div>
+                    <div class="challenge-goal">🎯 Objectif: Expliquer la chute du Mur</div>
+                    <div class="checkbox-container">
+                        <div class="custom-checkbox" data-challenge="german-history"></div>
+                        <span>Défi complété</span>
+                    </div>
+                </div>
+
+                <div class="challenge-card vocab-card" onclick="toggleChallenge(this)">
+                    <div class="challenge-title">🎨 Arts & Créativité</div>
+                    <div class="challenge-description">Vocabulaire des arts, musique, peinture, théâtre</div>
+                    <div class="challenge-goal">🎯 Objectif: Critiquer une œuvre d'art</div>
+                    <div class="checkbox-container">
+                        <div class="custom-checkbox" data-challenge="arts-vocab"></div>
+                        <span>Défi complété</span>
+                    </div>
+                </div>
+
+                <div class="challenge-card listening-card" onclick="toggleChallenge(this)">
+                    <div class="challenge-title">🎧 Podcasts Allemands</div>
+                    <div class="challenge-description">Écoute 2h de podcasts allemands par semaine</div>
+                    <div class="challenge-goal">🎯 Objectif: Résumer 5 épisodes</div>
+                    <div class="checkbox-container">
+                        <div class="custom-checkbox" data-challenge="podcasts"></div>
+                        <span>Défi complété</span>
+                    </div>
+                </div>
+
+                <div class="challenge-card grammar-card" onclick="toggleChallenge(this)">
+                    <div class="challenge-title">🔄 Voix Passive</div>
+                    <div class="challenge-description">Maîtrise la construction passive allemande</div>
+                    <div class="challenge-goal">🎯 Objectif: Transformer 50 phrases</div>
+                    <div class="checkbox-container">
+                        <div class="custom-checkbox" data-challenge="passive-voice"></div>
+                        <span>Défi complété</span>
+                    </div>
+                </div>
+
+                <div class="challenge-card speaking-card" onclick="toggleChallenge(this)">
+                    <div class="challenge-title">🤝 Négociation</div>
+                    <div class="challenge-description">Apprends à négocier et convaincre en allemand</div>
+                    <div class="challenge-goal">🎯 Objectif: Réussir 3 négociations</div>
+                    <div class="checkbox-container">
+                        <div class="custom-checkbox" data-challenge="negotiation"></div>
+                        <span>Défi complété</span>
+                    </div>
+                </div>
+
+                <div class="challenge-card writing-card" onclick="toggleChallenge(this)">
+                    <div class="challenge-title">📰 Articles de Presse</div>
+                    <div class="challenge-description">Écris des articles sur l'actualité</div>
+                    <div class="challenge-goal">🎯 Objectif: 5 articles publiables</div>
+                    <div class="checkbox-container">
+                        <div class="custom-checkbox" data-challenge="news-articles"></div>
+                        <span>Défi complété</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mois 5 -->
+        <div class="month-container">
+            <div class="month-header" onclick="toggleMonth('month5')">
+                <span class="month-title">🚀 Mois 5 : Vers la Fluidité</span>
+                <span class="month-level">B1 Intermédiaire</span>
+            </div>
+            <div id="month5" class="challenges-grid collapsed">
+                <div class="challenge-card speaking-card" onclick="toggleChallenge(this)">
+                    <div class="challenge-title">🎯 Conversations Spontanées</div>
+                    <div class="challenge-description">Parle 30min/jour avec des natifs sans préparation</div>
+                    <div class="challenge-goal">🎯 Objectif: Fluidité naturelle</div>
+                    <div class="checkbox-container">
+                        <div class="custom-checkbox" data-challenge="spontaneous-talk"></div>
+                        <span>Défi complété</span>
+                    </div>
+                </div>
+
+                <div class="challenge-card grammar-card" onclick="toggleChallenge(this)">
+                    <div class="challenge-title">🌊 Subjonctif II</div>
+                    <div class="challenge-description">Maîtrise les hypothèses et la politesse</div>
+                    <div class="challenge-goal">🎯 Objectif: Exprimer des souhaits complexes</div>
+                    <div class="checkbox-container">
+                        <div class="custom-checkbox" data-challenge="subjunctive"></div>
+                        <span>Défi complété</span>
+                    </div>
+                </div>
+
+                <div class="challenge-card listening-card" onclick="toggleChallenge(this)">
+                    <div class="challenge-title">🎪 Spectacles & Théâtre</div>
+                    <div class="challenge-description">Assiste à des pièces allemandes (en ligne ou en personne)</div>
+                    <div class="challenge-goal">🎯 Objectif: Comprendre sans sous-titres</div>
+                    <div class="checkbox-container">
+                        <div class="custom-checkbox" data-challenge="theater"></div>
+                        <span>Défi complété</span>
+                    </div>
+                </div>
+
+                <div class="challenge-card vocab-card" onclick="toggleChallenge(this)">
+                    <div class="challenge-title">🔬 Sciences & Technologie</div>
+                    <div class="challenge-description">Vocabulaire technique et scientifique</div>
+                    <div class="challenge-goal">🎯 Objectif: Expliquer ton domaine d'études</div>
+                    <div class="checkbox-container">
+                        <div class="custom-checkbox" data-challenge="science-vocab"></div>
+                        <span>Défi complété</span>
+                    </div>
+                </div>
+
+                <div class="challenge-card writing-card" onclick="toggleChallenge(this)">
+                    <div class="challenge-title">🎓 Dissertation</div>
+                    <div class="challenge-description">Rédige une dissertation de 1000 mots</div>
+                    <div class="challenge-goal">🎯 Objectif: Argumentation structurée</div>
+                    <div class="checkbox-container">
+                        <div class="custom-checkbox" data-challenge="essay"></div>
+                        <span>Défi complété</span>
+                    </div>
+                </div>
+
+                <div class="challenge-card culture-card" onclick="toggleChallenge(this)">
+                    <div class="challenge-title">🏛️ Politique Allemande</div>
+                    <div class="challenge-description">Comprends le système politique allemand</div>
+                    <div class="challenge-goal">🎯 Objectif: Débattre de politique</div>
+                    <div class="checkbox-container">
+                        <div class="custom-checkbox" data-challenge="politics"></div>
+                        <span>Défi complété</span>
+                    </div>
+                </div>
+
+                <div class="challenge-card speaking-card" onclick="toggleChallenge(this)">
+                    <div class="challenge-title">📞 Entretiens Professionnels</div>
+                    <div class="challenge-description">Simule des entretiens d'embauche</div>
+                    <div class="challenge-goal">🎯 Objectif: 5 entretiens réussis</div>
+                    <div class="checkbox-container">
+                        <div class="custom-checkbox" data-challenge="job-interviews"></div>
+                        <span>Défi complété</span>
+                    </div>
+                </div>
+
+                <div class="challenge-card grammar-card" onclick="toggleChallenge(this)">
+                    <div class="challenge-title">🔗 Propositions Relatives</div>
+                    <div class="challenge-description">Construis des phrases complexes</div>
+                    <div class="challenge-goal">🎯 Objectif: Phrases de 3 propositions</div>
+                    <div class="checkbox-container">
+                        <div class="custom-checkbox" data-challenge="relative-clauses"></div>
+                        <span>Défi complété</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mois 6 -->
+        <div class="month-container">
+            <div class="month-header" onclick="toggleMonth('month6')">
+                <span class="month-title">🎯 Mois 6 : Perfectionnement</span>
+                <span class="month-level">B1+ Avancé</span>
+            </div>
+            <div id="month6" class="challenges-grid collapsed">
+                <div class="challenge-card culture-card" onclick="toggleChallenge(this)">
+                    <div class="challenge-title">📚 Roman Allemand</div>
+                    <div class="challenge-description">Lis ton premier roman allemand complet</div>
+                    <div class="challenge-goal">🎯 Objectif: Rédiger une critique littéraire</div>
+                    <div class="checkbox-container">
+                        <div class="custom-checkbox" data-challenge="german-novel"></div>
+                        <span>Défi complété</span>
+                    </div>
+                </div>
+
+                <div class="challenge-card speaking-card" onclick="toggleChallenge(this)">
+                    <div class="challenge-title">🎤 Conférences</div>
+                    <div class="challenge-description">Donne des mini-conférences de 20 minutes</div>
+                    <div class="challenge-goal">🎯 Objectif: Captiver l'audience</div>
+                    <div class="checkbox-container">
+                        <div class="custom-checkbox" data-challenge="conferences"></div>
+                        <span>Défi complété</span>
+                    </div>
+                </div>
+
+                <div class="challenge-card vocab-card" onclick="toggleChallenge(this)">
+                    <div class="challenge-title">💡 Expressions Idiomatiques</div>
+                    <div class="challenge-description">Maîtrise 100 expressions typiques</div>
+                    <div class="challenge-goal">🎯 Objectif: Parler comme un natif</div>
+                    <div class="checkbox-container">
+                        <div class="custom-checkbox" data-challenge="idioms"></div>
+                        <span>Défi complété</span>
+                    </div>
+                </div>
+
+                <div class="challenge-card listening-card" onclick="toggleChallenge(this)">
+                    <div class="challenge-title">🎭 Dialectes Régionaux</div>
+                    <div class="challenge-description">Comprends différents accents allemands</div>
+                    <div class="challenge-goal">🎯 Objectif: Distinguer 5 dialectes</div>
+                    <div class="checkbox-container">
+                        <div class="custom-checkbox" data-challenge="dialects"></div>
+                        <span>Défi complété</span>
+                    </div>
+                </div>
+
+                <div class="challenge-card writing-card" onclick="toggleChallenge(this)">
+                    <div class="challenge-title">✒️ Poésie</div>
+                    <div class="challenge-description">Écris tes premiers poèmes en allemand</div>
+                    <div class="challenge-goal">🎯 Objectif: Recueil de 10 poèmes</div>
+                    <div class="checkbox-container">
+                        <div class="custom-checkbox" data-challenge="poetry"></div>
+                        <span>Défi complété</span>
+                    </div>
+                </div>
+
+                <div class="challenge-card grammar-card" onclick="toggleChallenge(this)">
+                    <div class="challenge-title">🎪 Participes & Gérondifs</div>
+                    <div class="challenge-description">Maîtrise toutes les formes participiales</div>
+                    <div class="challenge-goal">🎯 Objectif: Style élaboré</div>
+                    <div class="checkbox-container">
+                        <div class="custom-checkbox" data-challenge="participles"></div>
+                        <span>Défi complété</span>
+                    </div>
+                </div>
+
+                <div class="challenge-card speaking-card" onclick="toggleChallenge(this)">
+                    <div class="challenge-title">⚖️ Débats Formels</div>
+                    <div class="challenge-description">Participe à des débats structurés</div>
+                    <div class="challenge-goal">🎯 Objectif: Gagner 3 débats</div>
+                    <div class="checkbox-container">
+                        <div class="custom-checkbox" data-challenge="formal-debates"></div>
+                        <span>Défi complété</span>
+                    </div>
+                </div>
+
+                <div class="challenge-card culture-card" onclick="toggleChallenge(this)">
+                    <div class="challenge-title">🎼 Opéra Allemand</div>
+                    <div class="challenge-description">Découvre Wagner, Mozart et leurs œuvres</div>
+                    <div class="challenge-goal">🎯 Objectif: Analyser un opéra</div>
+                    <div class="checkbox-container">
+                        <div class="custom-checkbox" data-challenge="opera"></div>
+                        <span>Défi complété</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mois 7 -->
+        <div class="month-container">
+            <div class="month-header" onclick="toggleMonth('month7')">
+                <span class="month-title">🏆 Mois 7 : Excellence</span>
+                <span class="month-level">B2 Avancé</span>
+            </div>
+            <div id="month7" class="challenges-grid collapsed">
+                <div class="challenge-card speaking-card" onclick="toggleChallenge(this)">
+                    <div class="challenge-title">👨‍🏫 Enseigner l'Allemand</div>
+                    <div class="challenge-description">Donne des cours à des débutants</div>
+                    <div class="challenge-goal">🎯 Objectif: Former 3 élèves</div>
+                    <div class="checkbox-container">
+                        <div class="custom-checkbox" data-challenge="teaching"></div>
+                        <span>Défi complété</span>
+                    </div>
+                </div>
+
+                <div class="challenge-card writing-card" onclick="toggleChallenge(this)">
+                    <div class="challenge-title">📑 Mémoire de Recherche</div>
+                    <div class="challenge-description">Rédige un mémoire de 3000 mots</div>
+                    <div class="challenge-goal">🎯 Objectif: Niveau universitaire</div>
+                    <div class="checkbox-container">
+                        <div class="custom-checkbox" data-challenge="research-paper"></div>
+                        <span>Défi complété</span>
+                    </div>
+                </div>
+
+                <div class="challenge-card listening-card" onclick="toggleChallenge(this)">
+                    <div class="challenge-title">🎥 Films Sans Sous-Titres</div>
+                    <div class="challenge-description">Regarde 10 films allemands récents</div>
+                    <div class="challenge-goal">🎯 Objectif: 100% de compréhension</div>
+                    <div class="checkbox-container">
+                        <div class="custom-checkbox" data-challenge="movies-no-subs"></div>
+                        <span>Défi complété</span>
+                    </div>
+                </div>
+
+                <div class="challenge-card vocab-card" onclick="toggleChallenge(this)">
+                    <div class="challenge-title">🏛️ Vocabulaire Académique</div>
+                    <div class="challenge-description">Maîtrise le langage universitaire</div>
+                    <div class="challenge-goal">🎯 Objectif: Suivre des cours en allemand</div>
+                    <div class="checkbox-container">
+                        <div class="custom-checkbox" data-challenge="academic-vocab"></div>
+                        <span>Défi complété</span>
+                    </div>
+                </div>
+
+                <div class="challenge-card culture-card" onclick="toggleChallenge(this)">
+                    <div class="challenge-title">🌍 Allemagne Contemporaine</div>
+                    <div class="challenge-description">Analyse les enjeux sociaux actuels</div>
+                    <div class="challenge-goal">🎯 Objectif: Débat sur l'actualité</div>
+                    <div class="checkbox-container">
+                        <div class="custom-checkbox" data-challenge="contemporary-germany"></div>
+                        <span>Défi complété</span>
+                    </div>
+                </div>
+
+                <div class="challenge-card grammar-card" onclick="toggleChallenge(this)">
+                    <div class="challenge-title">🎭 Discours Rapporté</div>
+                    <div class="challenge-description">Maîtrise le Konjunktiv I</div>
+                    <div class="challenge-goal">🎯 Objectif: Journalisme professionnel</div>
+                    <div class="checkbox-container">
+                        <div class="custom-checkbox" data-challenge="reported-speech"></div>
+                        <span>Défi complété</span>
+                    </div>
+                </div>
+
+                <div class="challenge-card speaking-card" onclick="toggleChallenge(this)">
+                    <div class="challenge-title">🎯 Présentations Professionnelles</div>
+                    <div class="challenge-description">Présente des projets complexes</div>
+                    <div class="challenge-goal">🎯 Objectif: Convaincre des investisseurs</div>
+                    <div class="checkbox-container">
+                        <div class="custom-checkbox" data-challenge="professional-presentations"></div>
+                        <span>Défi complété</span>
+                    </div>
+                </div>
+
+                <div class="challenge-card writing-card" onclick="toggleChallenge(this)">
+                    <div class="challenge-title">📖 Nouvelles Littéraires</div>
+                    <div class="challenge-description">Écris dans le style des grands auteurs</div>
+                    <div class="challenge-goal">🎯 Objectif: Style personnel développé</div>
+                    <div class="checkbox-container">
+                        <div class="custom-checkbox" data-challenge="literary-stories"></div>
+                        <span>Défi complété</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mois 8 -->
+        <div class="month-container">
+            <div class="month-header" onclick="toggleMonth('month8')">
+                <span class="month-title">👑 Mois 8 : Maîtrise Complète</span>
+                <span class="month-level">B2+ Expert</span>
+            </div>
+            <div id="month8" class="challenges-grid collapsed">
+                <div class="challenge-card speaking-card" onclick="toggleChallenge(this)">
+                    <div class="challenge-title">🎪 Improvisation</div>
+                    <div class="challenge-description">Théâtre d'improvisation en allemand</div>
+                    <div class="challenge-goal">🎯 Objectif: Spectacle de 30 minutes</div>
+                    <div class="checkbox-container">
+                        <div class="custom-checkbox" data-challenge="improvisation"></div>
+                        <span>Défi complété</span>
+                    </div>
+                </div>
+
+                <div class="challenge-card writing-card" onclick="toggleChallenge(this)">
+                    <div class="challenge-title">📚 Roman Court</div>
+                    <div class="challenge-description">Écris une novella de 15000 mots</div>
+                    <div class="challenge-goal">🎯 Objectif: Publier ton œuvre</div>
+                    <div class="checkbox-container">
+                        <div class="custom-checkbox" data-challenge="novella"></div>
+                        <span>Défi complété</span>
+                    </div>
+                </div>
+
+                <div class="challenge-card culture-card" onclick="toggleChallenge(this)">
+                    <div class="challenge-title">🎨 Art & Philosophie</div>
+                    <div class="challenge-description">Étudie les penseurs allemands (Kant, Nietzsche)</div>
+                    <div class="challenge-goal">🎯 Objectif: Dissertation philosophique</div>
+                    <div class="checkbox-container">
+                        <div class="custom-checkbox" data-challenge="philosophy"></div>
+                        <span>Défi complété</span>
+                    </div>
+                </div>
+
+                <div class="challenge-card listening-card" onclick="toggleChallenge(this)">
+                    <div class="challenge-title">📻 Radio Live</div>
+                    <div class="challenge-description">Comprends toutes les émissions en direct</div>
+                    <div class="challenge-goal">🎯 Objectif: Appeler en direct</div>
+                    <div class="checkbox-container">
+                        <div class="custom-checkbox" data-challenge="live-radio"></div>
+                        <span>Défi complété</span>
+                    </div>
+                </div>
+
+                <div class="challenge-card vocab-card" onclick="toggleChallenge(this)">
+                    <div class="challenge-title">🎯 Vocabulaire Spécialisé</div>
+                    <div class="challenge-description">Maîtrise 3 domaines techniques</div>
+                    <div class="challenge-goal">🎯 Objectif: Expert dans tes domaines</div>
+                    <div class="checkbox-container">
+                        <div class="custom-checkbox" data-challenge="specialized-vocab"></div>
+                        <span>Défi complété</span>
+                    </div>
+                </div>
+
+                <div class="challenge-card grammar-card" onclick="toggleChallenge(this)">
+                    <div class="challenge-title">👑 Styles Littéraires</div>
+                    <div class="challenge-description">Maîtrise tous les registres de langue</div>
+                    <div class="challenge-goal">🎯 Objectif: Du familier au soutenu</div>
+                    <div class="checkbox-container">
+                        <div class="custom-checkbox" data-challenge="language-registers"></div>
+                        <span>Défi complété</span>
+                    </div>
+                </div>
+
+                <div class="challenge-card speaking-card" onclick="toggleChallenge(this)">
+                    <div class="challenge-title">🏆 Test Final</div>
+                    <div class="challenge-description">Passe un test de niveau B2/C1</div>
+                    <div class="challenge-goal">🎯 Objectif: Certification officielle</div>
+                    <div class="checkbox-container">
+                        <div class="custom-checkbox" data-challenge="final-test"></div>
+                        <span>Défi complété</span>
+                    </div>
+                </div>
+
+                <div class="challenge-card culture-card" onclick="toggleChallenge(this)">
+                    <div class="challenge-title">🎉 Célébration</div>
+                    <div class="challenge-description">Organise une fête 100% en allemand</div>
+                    <div class="challenge-goal">🎯 Objectif: Tes 19 ans en allemand !</div>
+                    <div class="checkbox-container">
+                        <div class="custom-checkbox" data-challenge="celebration"></div>
+                        <span>Défi complété</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let completedChallenges = 0;
+        let currentStreak = 0;
+        let lastCompletedDate = null;
+        const totalChallenges = 64;
+
+        function toggleMonth(monthId) {
+            const month = document.getElementById(monthId);
+            month.classList.toggle('collapsed');
+        }
+
+        function toggleChallenge(card) {
+            const checkbox = card.querySelector('.custom-checkbox');
+            const challengeId = checkbox.dataset.challenge;
+            
+            checkbox.classList.toggle('checked');
+            card.classList.add('pulse');
+            
+            setTimeout(() => {
+                card.classList.remove('pulse');
+            }, 500);
+
+            updateProgress();
+            updateStats();
+        }
+
+        function updateProgress() {
+            const checkboxes = document.querySelectorAll('.custom-checkbox.checked');
+            completedChallenges = checkboxes.length;
+            
+            const progressPercentage = (completedChallenges / totalChallenges) * 100;
+            document.getElementById('overallProgress').style.width = progressPercentage + '%';
+            document.getElementById('progressText').textContent = `Progression: ${completedChallenges}/${totalChallenges} défis complétés`;
+        }
+
+        function updateStats() {
+            document.getElementById('completedChallenges').textContent = completedChallenges;
+            
+            // Simulate streak calculation
+            const today = new Date().toDateString();
+            if (lastCompletedDate !== today) {
+                currentStreak++;
+                lastCompletedDate = today;
+            }
+            document.getElementById('currentStreak').textContent = currentStreak;
+
+            // Update estimated level based on progress
+            let level = 'A1';
+            if (completedChallenges >= 8) level = 'A1+';
+            if (completedChallenges >= 16) level = 'A2';
+            if (completedChallenges >= 24) level = 'A2+';
+            if (completedChallenges >= 32) level = 'B1';
+            if (completedChallenges >= 40) level = 'B1+';
+            if (completedChallenges >= 48) level = 'B2';
+            if (completedChallenges >= 56) level = 'B2+';
+            if (completedChallenges >= 64) level = 'C1';
+            
+            document.getElementById('estimatedLevel').textContent = level;
+
+            // Update time remaining (simulate countdown)
+            const monthsRemaining = Math.max(0, 8 - Math.floor(completedChallenges / 8));
+            document.getElementById('timeRemaining').textContent = monthsRemaining;
+        }
+
+        // Initialize
+        updateProgress();
+        updateStats();
+    </script>
+</body>
+</html>
